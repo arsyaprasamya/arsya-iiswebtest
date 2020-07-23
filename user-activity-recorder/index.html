@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>User Activity Recorder</title>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" 
+	integrity=
+	"sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" 
+	crossorigin="anonymous"></script>
+	<script src="./index.js"></script>
+
+	<style>
+	body {
+		background-color:#555;
+		font-family: 'Roboto';
+		margin: 1px;
+	}
+	.warp {
+		margin: 150px auto;
+		background-color:#fafafa;
+		max-width:800px;
+		padding:20px;
+		line-height: 1.7;
+	}
+	.status p {
+		background-color:#656D77;
+		height: 24px;
+		line-height:24px;
+		color: #fff;
+		padding: 10px;
+	}
+	.vr-mark {
+		width:30px;
+		height:30px;
+		border-top:2px solid #00f;
+		border-left: 2px solid #00f;
+		font-size: 11px;
+		color: #00f;
+		z-index: 3000;
+	}
+	</style>
+</head>
+<body>
+<div id="jquery-menu">
+	<div class="jquery-center">
+		<div class="jquery-ads">
+			<script type="text/javascript"
+			src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+			</script>
+		</div>
+		<div class="jquery-clear"></div>
+	</div>
+</div>
+
+<div class="warp">
+	<h2>How to: press Start Record -> doing something -> press Stop Record</h2>
+    <h3>Click anywhere!</h3>
+	<button id="record">Start Record</button>
+	<button id="play">Play</button>
+	<div class="status">
+		<p id="status-rec"></p>
+		<p id="status-play"></p>
+	</div>
+
+	<script>
+	$(function(){
+		var rec = new viewRec({interval:250});
+		var recorded = false;
+		var play = false;
+		$('#record').click(function() {
+			if (recorded) {
+				rec.stopRecord();
+				$('#status-rec').html('Stop Record!');
+				$(this).html('Start Record');
+				recorded = false;
+			}
+			else {
+				rec.startRecord();
+				$('#status-rec').html('Recording...');
+				$(this).html('Stop Record');
+				recorded = true;
+			}
+		});
+
+		$('#play').click(function(){
+			if(play) {
+				rec.stop();
+				$('#status-play').html('Stop!');
+				$(this).html('Play');
+				play = false;
+			}
+			else {
+				rec.play();
+				$('#status-play').html('Playing...');
+				$(this).html('Stop');
+				play = true;
+			}
+		});
+
+		rec.on('stop',function() {
+			$('#status-play').html('Stop!');
+			$('#play').html('Play');
+			play = false;
+		});
+	});
+	</script>
+	
+	<p>Click anywhere!</p>
+</div>
+</body>
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'abcde.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+	var ga = document.createElement('script'); 
+	ga.type = 'text/javascript'; 
+	ga.async = true;
+	ga.src = ('https:' == document.location.protocol ? 
+	'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	var s = document.getElementsByTagName('script')[0]; 
+	s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</html>
