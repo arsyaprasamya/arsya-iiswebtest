@@ -7,7 +7,7 @@
   "dependencies": {
     "react": "16.3.2",
     "react-dom": "16.3.2",
-    "react-move": "2.8.0",
+    "react-move": "6.5.0",
     "react-scripts": "1.1.4"
   },
   "devDependencies": {},
